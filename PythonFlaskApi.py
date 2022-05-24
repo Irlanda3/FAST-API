@@ -2,6 +2,7 @@
 #por que en OS terminal alli installe FastAPI
 import fastapi
 from fastapi import FastAPI, Path
+from typing import Optional
 
 app = FastAPI() # To create API object 
 
@@ -35,7 +36,7 @@ def get_item(item_id : int = Path(None, description="The ID of the item you woul
 # Mas o menos asi es query parameter lleva un ? es como decir feacebook.com/home?reidrect=/tim&msg=fail
 # how do we accept query parameter for our endpoint
 @app.get("/get-by-name")# this qery parameter is going to be the name of the item we want to retrieve
-def get_item(name: str):
+def get_item(name: Optional[str] = None):
     for item_id in inventory:
         if inventory[item_id]["name"] == name:
             return inventory[item_id]
